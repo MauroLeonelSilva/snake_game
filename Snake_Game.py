@@ -2,10 +2,6 @@ import os
 import random
 import readchar
 
-POS_X = 0
-POS_Y = 1
-
-NUM_OF_MAP_OBJECTS = 1
 
 #INSTRUCTIONS
 # FOR CREATE THE MAP, EACH LINE MUST BE THE SAME SIZE, IF YOU DONT
@@ -14,6 +10,12 @@ NUM_OF_MAP_OBJECTS = 1
 # If it seems more practical to put another symbol instead of putting spaces, you can put any character except "#"
 
 # THE HASH ("#") IS A OBSTACLE WALL, YOU CAN'T GO THROUGH IT 
+# IF YOU PRESS "Q" EXIT GAME
+# YOU CAN INDICATE HOW MANY FRUITS APPEAR ON THE MAP IN THE LINE(NUM_OF_MAP_FRUITS)
+
+
+
+#Create the Map here:
 obstacle_definition = """\
 #############   ############
 #                          #
@@ -31,11 +33,17 @@ obstacle_definition = """\
 #############   ############\
 """
 
+POS_X = 0
+POS_Y = 1
+
+# How many fruits (*) do you want to appear on the screen?
+NUM_OF_MAP_FRUITS = 1
+
 my_position = [1,1]
 tail_length = 0 
 tail = []
 map_objects = []
-num_of_objects = NUM_OF_MAP_OBJECTS + len(map_objects)
+num_of_objects = NUM_OF_MAP_FRUITS+ len(map_objects)
 
 end_game = False
 died = False
@@ -59,7 +67,7 @@ while not end_game:
     os.system("cls")
 
     #generate random objects in the map
-    while len(map_objects) < NUM_OF_MAP_OBJECTS:
+    while len(map_objects) < NUM_OF_MAP_FRUITS:
 
         new_position = [random.randint(0, MAP_WIDTH - 1), random.randint(0, MAP_HEIGHT - 1)]
 
@@ -112,11 +120,11 @@ while not end_game:
         print("|")
 
     print("+" + "-" * MAP_WIDTH * 2 + "+")
-    print("Need to eat " + str(total_objects - tail_length - NUM_OF_MAP_OBJECTS + 1) + " ' * ' to win")
+    print("Need to eat " + str(total_objects - tail_length - NUM_OF_MAP_FRUITS + 1) + " ' * ' to win")
     
             
 
-    #player movement
+    #movimiento del jugador
     direction = str(readchar.readchar())
     new_position = None
 
@@ -150,4 +158,3 @@ while not end_game:
 
 if died:
     print("Game Over!")
-
