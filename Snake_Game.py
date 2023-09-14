@@ -116,7 +116,7 @@ while not end_game:
     
             
 
-    #movimiento del jugador
+    #player movement
     direction = str(readchar.readchar())
     new_position = None
 
